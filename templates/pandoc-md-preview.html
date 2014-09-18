@@ -1,0 +1,775 @@
+$if(html5)$
+<!DOCTYPE html>
+<html$if(lang)$ lang="$lang$"$endif$>
+$else$
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"$if(lang)$ lang="$lang$" xml:lang="$lang$"$endif$>
+$endif$
+<head>
+$if(html5)$
+  <meta charset="utf-8" />
+$else$
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+$endif$
+  <meta name="generator" content="pandoc" />
+$for(author)$
+  <meta name="author" content="$author$" />
+$endfor$
+$if(date)$
+  <meta name="date" content="$date$" />
+$endif$
+  <title>$if(title-prefix)$$title-prefix$ - $endif$$if(pagetitle)$$pagetitle$$endif$</title>
+$if(html5)$
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+$endif$
+$if(base_href)$
+  <base href="$base_href$" />
+$endif$
+  <style type="text/css">
+/*<![CDATA[*/
+  [hidden] {
+    display: none
+  }
+  html {
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%
+  }
+  html,button,input,select,textarea {
+    font-family: sans-serif;
+    color: #222
+  }
+  body {
+    margin: 0;
+    font-size: 1em;
+    line-height: 1.4;
+  }
+  a {
+    color: #00e
+  }
+  a:visited {
+    color: #551a8b
+  }
+  a:hover {
+    color: #06e
+  }
+  a:focus {
+    outline: thin dotted
+  }
+  a:hover,a:active {
+    outline: 0
+  }
+  abbr[title] {
+    border-bottom: 1px dotted
+  }
+  b,strong {
+    font-weight: bold
+  }
+  blockquote {
+    margin: 1em 40px
+  }
+  dfn {
+    font-style: italic
+  }
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0
+  }
+  ins {
+    background: #ff9;
+    color: #000;
+    text-decoration: none
+  }
+  mark {
+    background: #ff0;
+    color: #000;
+    font-style: italic;
+    font-weight: bold
+  }
+  pre,code,kbd,samp {
+    font-family: "Bitstream Vera Sans Mono",Menlo,Consolas,monospace,serif;
+    font-size: 0.9em
+  }
+  pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word
+  }
+  q {
+    quotes: none
+  }
+  q:before,q:after {
+    content: "";
+    content: none
+  }
+  small {
+    font-size: 85%
+  }
+  sub,sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline
+  }
+  sup {
+    top: -0.5em
+  }
+  sub {
+    bottom: -0.25em
+  }
+  ul,ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    list-style-type: none
+  }
+  dd {
+    margin: 0 0 0 40px
+  }
+  nav ul,nav ol {
+    list-style: none;
+    list-style-image: none;
+    margin: 0;
+    padding: 0
+  }
+  img {
+    border: 0;
+    -ms-interpolation-mode: bicubic;
+    vertical-align: middle;
+    padding-left: 20px;
+  }
+  svg:not(:root) {
+    overflow: hidden
+  }
+  figure {
+    margin: 0
+  }
+  form {
+    margin: 0
+  }
+  fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0
+  }
+  label {
+    cursor: pointer
+  }
+  legend {
+    border: 0;*margin-left:-7px;
+    padding: 0;
+    white-space: normal
+  }
+  button,input,select,textarea {
+    font-size: 100%;
+    margin: 0;
+    vertical-align: baseline;*vertical-align:middle
+  }
+  button,input {
+    line-height: normal
+  }
+  button,input[type="button"],input[type="reset"],input[type="submit"] {
+    cursor: pointer;
+    -webkit-appearance: button;*overflow:visible
+  }
+  button[disabled],input[disabled] {
+    cursor: default
+  }
+  input[type="checkbox"],input[type="radio"] {
+    box-sizing: border-box;
+    padding: 0;*width:13px;*height:13px
+  }
+  input[type="search"] {
+    -webkit-appearance: textfield;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box
+  }
+  input[type="search"]::-webkit-search-decoration,input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none
+  }
+  button::-moz-focus-inner,input::-moz-focus-inner {
+    border: 0;
+    padding: 0
+  }
+  textarea {
+    overflow: auto;
+    vertical-align: top;
+    resize: vertical
+  }
+  input:invalid,textarea:invalid {
+    background-color: #f0dddd
+  }
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-top: 1px solid #777;
+    border-bottom: 1px solid #777;
+  }
+  td, th {
+    vertical-align: top;
+    padding: 0 10px;
+  }
+  th {
+    font-weight: normal;
+    border-bottom: 1px solid #777;
+  }
+  .hidden {
+    display: none!important;
+    visibility: hidden
+  }
+  .visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px
+  }
+  .visuallyhidden.focusable:active,.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto
+  }
+  .invisible {
+    visibility: hidden
+  }
+  .clearfix:before,.clearfix:after {
+    content: "";
+    display: table
+  }
+  .clearfix:after {
+    clear: both
+  }
+  .clearfix {*zoom:1
+  }
+  .flourish {
+    background: transparent url(flourish.png) no-repeat center;
+    width: 100%;
+    max-width: 500px;
+    height: 50px;
+    margin: 50px 0 0 -20px; /* minor penalty for ragged right edge */
+  }
+  .footnotes {
+    border-top: 3px solid #d2d2d2;
+    max-width: 500px;
+  }
+  .footnotes a[rel=reference] {
+    margin-left: 0.3em;
+    border-bottom-style: none;
+  }
+  .footnotes a[rel=reference]:hover {
+    background: #eee;  
+  }
+  .figure {
+    text-align: center;
+    font-size: 14px;
+    line-height: 18px;
+    color: #777;
+  }
+  .figure img {
+    display: inline;
+    padding: 0;
+    max-width: 100%;
+  }
+  .figure.shadow img {
+    -webkit-box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.4);
+  }
+  .hn-comments {
+    font-style: italic;
+  }
+  .hn-comments iframe.hn-like {
+    min-height: 0px;
+    display: inline;
+    width: 115px;
+    padding: 0px;
+    margin: -12px 0 -2px 0;
+  }
+  
+  body {
+    background-color: #fff;
+    font-family: "TisaPro", "Liberation Serif", Georgia, serif;
+    font-weight: 400;
+  }
+  h1,h2,h3,h4,h5,h6 {
+    color: #3a3a3a;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    max-width: 480px
+  }
+  h1 a,h2 a,h3 a,h4 a,h5 a,h6 a {
+    font-weight: inherit
+  }
+  h1 {
+    font-size: 22px;
+    font-weight: bold;
+    font-family: "Futura PT Web Heavy", Futura, serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  h2 {
+    font-size: 20px;
+    font-family: "Futura PT Web Heavy", Futura, serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 20px;
+  }
+  h3 {
+    font-size: 19px;
+    font-weight: 600
+  }
+  h4 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #555
+  }
+  h5 {
+    color: #555;
+    font-size: 17px
+  }
+  h6 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #555
+  }
+  p {
+    font-size: 16px;
+    line-height: 26px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: 400;
+  }
+  p img {
+    margin: 0
+  }
+  em {
+    font-style: italic
+  }
+  strong {
+    font-weight: bold;
+    color: #333
+  }
+  small {
+    font-size: 80%
+  }
+  a:link,a:visited,a:hover,a:active {
+    text-decoration: none
+  }
+  blockquote {
+    display: inline-block;
+    padding-left: 18px;
+    padding-bottom: 0;
+    font-size: 16px;
+    line-height: 25px;
+    margin-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-left: 5px solid #d4d4d4;
+  }
+  article blockquote code ol {
+    margin-left: 28px
+  }
+  article blockquote pre code {
+    margin-left: 0
+  }
+  article blockquote h1,article blockquote h2,article blockquote h3,article blockquote h4 {
+    margin-top: 15px
+  }
+  article blockquote p:first-child {
+    margin-top: 0;
+    padding-top: 0
+  }
+  article blockquote p:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0
+  }
+  article blockquote blockquote {
+    border-color: #e6e6e6
+  }
+  article blockquote blockquote blockquote {
+    border-color: #ccc
+  }
+  article.post blockquote p {
+    max-width: 480px
+  }
+  article.post blockquote blockquote p {
+    max-width: 440px
+  }
+  article.post blockquote blockquote blockquote p {
+    max-width: 420px
+  }
+  hr {
+    border: solid #f4f3f3;
+    border-width: 5px 0 0;
+    clear: both;
+    margin: 0;
+    margin-left: -20px;
+    margin-right: -20px;
+    height: 0;
+    width: auto;
+    max-width: 540px;
+    border-radius: 5px
+  }
+  a,a:visited {
+    color: #333;
+    text-decoration: none;
+    outline: 0
+  }
+  a:hover,a:focus {
+    color: #000
+  }
+  p a,p a:visited {
+    line-height: inherit
+  }
+  article iframe,article object {
+    display: block;
+    margin: 0;
+    max-width: 500px;
+    float: none;
+  }
+  ul,ol {
+    margin-bottom: 20px;
+    padding: 0;
+    margin: 0;
+    margin-left: 20px
+  }
+  ul {
+    display: block;
+    list-style-type: none
+  }
+  article.post ul {
+    list-style-type: disc;
+    max-width: 470px
+  }
+  article.post ul li,article.post ol li {
+    font-size: 16px;
+    line-height: 25px;
+    margin: 0;
+    color: #4d4d4d;
+    display: list-item;
+    margin-bottom: 5px;
+    margin-top: 5px
+  }
+  article.post ol {
+    max-width: 470px
+  }
+  ol {
+    list-style: decimal
+  }
+  article.post ul ul {
+    list-style-type: circle;
+  }
+  article.post ul ul ul {
+    list-style-type: square;
+  }
+  ul ul,ul ol,ol ol,ol ul {
+    margin: 4px 0 5px 20px;
+    font-size: 90%
+  }
+  ul ul li,ul ol li,ol ol li,ol ul li {
+    margin-bottom: 6px
+  }
+  li {
+    line-height: 18px;
+    margin-bottom: 12px
+  }
+  code {
+    border: 1px solid #d2d2d2;
+    background-color: #f8f8f8;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: inline;
+    padding-right: 5px;
+    font-size: 13px;
+    line-height: 23px;
+  }
+  p code,li code {
+    border-radius: px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px
+  }
+  code span.pln {
+    padding-left: 0;
+    padding-right: 0
+  }
+  pre code span.pln {
+    padding-left: 0
+  }
+  code ol li span.pln {
+    padding: none
+  }
+  code ol {
+    padding-right: 0;
+    margin: 0;
+    padding: 0
+  }
+  code li {
+    padding: 0;
+    padding-top: 3px;
+    padding-bottom: 5px;
+    padding-right: 0;
+    margin: 0
+  }
+  pre {
+    border: none
+  }
+  pre code {
+    border: none;
+    display: block;
+    border: 1px solid #d2d2d2;
+    background-color: #f8f8f8;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 13px;
+    margin-left: -50px;
+    margin-right: 0;
+    width: auto;
+    border-left: none;
+    border-right: none;
+    padding-left: 50px
+  }
+  pre code ol li {
+    border: none;
+    margin: 0;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px
+  }
+  article pre code ul li,article pre code ol li {
+    font-family: monospace,monospace;
+    font-size: 16px;
+    line-height: 16px
+  }
+  article blockquote code ol {
+    margin-left: 28px
+  }
+  article blockquote pre code {
+    margin-left: 0
+  }
+  
+  article h2 a.no-link {
+    font-size: 28px
+  }
+  article.post h2,article.post p {
+    max-width: 500px
+  }
+  article h2 a:link,article h2 a:hover,article h2 a:visited,article h2 a:active {
+    color: black;
+    text-decoration: none;
+    border-bottom: 1px solid #CCC;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 700;
+  }
+  article h2 a.no-link {
+    border: none;
+    font-size: 28px
+  }
+  article h2 a.anchor {
+    border-bottom: 0;
+    margin-left: 10px
+  }
+  article h2 img.scalable {
+    width: 16px;
+    height: 15px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    background: center center no-repeat\9;
+    height: 18px\9;
+    border: 0;
+    vertical-align: top;
+    padding-top: 7px
+  }
+  article a:link,article a:visited,article a:hover,article a:active {
+    text-decoration: none;
+    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    color: #000
+  }
+  article a:hover {
+    border-bottom: 1px solid #999;
+  }
+  
+  #river {
+    margin: 0 auto;
+    max-width: 500px;
+    padding: 30px;
+  }
+  
+  .caption {
+    text-align: center;
+    font-size: 14px;
+    line-height: 18px;
+    color: #777;
+    margin-top: 0;
+  }
+  
+  /* ====================== */
+  /* = PRINT-SPECIFIC CSS = */
+  /* ====================== */
+
+  @media print {
+    * {
+      background: transparent!important;
+      color: black!important;
+      box-shadow: none!important;
+      text-shadow: none!important;
+      filter: none!important;
+      -ms-filter: none!important
+    }
+    p,blockquote,article.post ul li,article.post ol li, article pre code ul li, article pre code ol li {
+      font-size: 18px;
+      text-align: justify;
+    }
+    #river {
+      padding: 0 100px;
+    }
+    #river, .flourish, .footnotes, article.post h2, article.post p {
+      max-width: 800px !important;
+      width: 800px !important;
+    }
+    article.post ul, article.post ol {
+      max-width: 770px !important;
+      width: 770px !important;
+    }
+    a,a:visited {
+      text-decoration: underline
+    }
+    a[href]:after {
+      font-size: 60%;
+      font-family: "Bitstream Vera Sans Mono",Menlo,Consolas,monospace,serif;
+      content: " <" attr(href) ">"
+    }
+    abbr[title]:after {
+      font-size: 60%;
+      content: " (" attr(title) ")"
+    }
+    .ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after {
+      content: ""
+    }
+    pre,blockquote {
+      border: 1px solid #999;
+      page-break-inside: avoid
+    }
+    thead {
+      display: table-header-group
+    }
+    tr,img {
+      page-break-inside: avoid
+    }
+    img {
+      max-width: 100%!important
+    }
+    @page {
+      margin: .5cm
+    }
+    p,h2,h3 {
+      orphans: 3;
+      widows: 3
+    }
+    h2,h3 {
+      page-break-after: avoid
+    }
+  }
+/*]]>*/
+  </style>
+$if(highlighting-css)$
+  <style type="text/css">
+/*<![CDATA[*/
+$highlighting-css$
+/*]]>*/
+  </style>
+$endif$
+$for(css)$
+  <link rel="stylesheet" href="$css$" $if(html5)$$else$type="text/css" $endif$/>
+$endfor$
+$if(math)$
+  <script type="text/javascript">
+    window.MathJax = {
+      jax: ["input/TeX","output/HTML-CSS"],
+      "HTML-CSS": {
+        preferredFont: "STIX",
+        availableFonts: [],
+        preferredFont:"TeX",
+        webFont: "Latin-Modern",
+        imageFont: "",
+        undefinedFamily:"'Arial Unicode MS',serif"
+      }
+    };
+  </script>
+  $math$
+$endif$
+$for(header-includes)$
+  $header-includes$
+$endfor$
+</head>
+<body>
+$for(include-before)$
+$include-before$
+$endfor$
+
+$if(html5)$
+<section id="river" role="main">
+<article class="post">
+$else$
+<div id="river">
+<div class="article post">
+$endif$
+
+$if(toc)$
+$if(html5)$
+<nav id="$idprefix$TOC">
+$toc$
+</nav>
+$else$
+<div id="$idprefix$TOC">
+$toc$
+</div>
+$endif$
+$endif$
+
+$if(title)$
+<h2 class="entry-title">
+  <a href="#" class="no-link" title="Permalink to $title$" rel="bookmark">$title$</a>
+</h2>
+$endif$
+
+<div class="entry-content">
+$if(date)$
+<div class="meta-block clearfix">
+  <div class="date-meta">$date$</div>
+</div>
+$endif$
+  
+$body$
+
+</div>
+
+$if(html5)$
+</article>
+</section>
+$else$
+</div>
+</div>
+$endif$
+
+$for(include-after)$
+$include-after$
+$endfor$
+</body>
+</html>

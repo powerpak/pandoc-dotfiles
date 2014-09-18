@@ -1,0 +1,145 @@
+%--------------------------------------
+% Theodore Pak's pandoc letter template
+%--------------------------------------
+
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[$if(fontsize)$$fontsize$$else$12pt$endif$, letterpaper]{letter}
+\usepackage{setspace}
+\linespread{1.1}
+\clubpenalty=10000
+\widowpenalty=10000
+\usepackage{gensymb,amsmath}
+
+\signature{Theodore Pak}
+% \address{17 Hemlock Dr. \\ Miller Place, NY 11764}
+
+% DOCUMENT LAYOUT
+%\usepackage{pdfsync} SOMEHOW THIS MESSES UP LONGTABLES
+\usepackage{geometry} 
+\geometry{
+  body={6.5in, 10in},
+  left=1in,
+  top=0.5in
+}
+\usepackage{nopageno}
+\longindentation=0pt
+
+% FONTS
+\usepackage{ifxetex,ifluatex}
+\usepackage[protrusion=true,final]{microtype}
+\ifxetex
+  \usepackage{fontspec}
+  \defaultfontfeatures{Mapping=tex-text} % converts LaTeX specials (``quotes'' --- dashes etc.) to unicode
+  \setromanfont [Ligatures={Common}]{Minion Pro}
+  \setmonofont[Scale=0.8]{Bitstream Vera Sans Mono} 
+  \setsansfont[Scale=0.9]{Optima Regular}
+  \usepackage[normalem]{ulem} 
+\else
+  \ifluatex
+    \usepackage{fontspec}
+    \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \else
+    \usepackage[utf8]{inputenc}
+  \fi
+\fi
+
+% COMPACT LISTS
+\usepackage{mdwlist}
+% IN-PARA LIST
+\usepackage{paralist}
+
+$if(lhs)$
+\usepackage{listings}
+\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+$endif$
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+$endif$
+$if(fancy-enums)$
+% Redefine labelwidth for lists; otherwise, the enumerate package will cause
+% markers to extend beyond the left margin.
+\makeatletter\AtBeginDocument{%
+  \renewcommand{\@listi}
+    {\setlength{\labelwidth}{4em}}
+}\makeatother
+\usepackage{enumerate}
+$endif$
+$if(tables)$
+\usepackage{ctable}
+$endif$
+$if(url)$
+\usepackage{url}
+$endif$
+$if(graphics)$
+% We will generate all images so they have a width \maxwidth. This means
+% that they will get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+\else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=\maxwidth]{#1}}
+$endif$
+\ifxetex
+  \usepackage[bookmarks, breaklinks, pdfauthor={Theodore Pak}]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\usepackage{color}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\definecolor{darkred}{rgb}{0.3,0,0}
+\hypersetup{colorlinks, linkcolor=black, citecolor=darkred, filecolor=black, urlcolor=darkblue}
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+% avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+$if(subscript)$
+\newcommand{\textsubscr}[1]{\ensuremath{_{\scriptsize\textrm{#1}}}}
+$endif$
+$if(listings)$
+\usepackage{listings}
+$endif$
+$if(numbersections)$
+$else$
+\setcounter{secnumdepth}{0}
+$endif$
+$if(verbatim-in-note)$
+\VerbatimFootnotes % allows verbatim text in footnotes
+$endif$
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+\begin{document}
+
+% title has been overloaded as the recipient address
+$if(title)$
+\begin{letter}{$title$}
+$else$
+\begin{letter}{}
+$endif$
+
+% author has been overloaded as the opening
+$if(author)$
+\opening{$author$}
+$endif$
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+
+$body$
+
+$for(include-after)$
+$include-after$
+
+$endfor$
+
+\end{letter}
+
+\end{document}

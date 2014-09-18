@@ -1,0 +1,205 @@
+%-------------------------------------
+% Theodore Pak's pandoc paper template
+%-------------------------------------
+
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[$if(fontsize)$$fontsize$$else$12pt$endif$, letterpaper]{article}
+\usepackage[square, numbers, sort&compress]{natbib}
+\usepackage{setspace}
+$if(linespread)$
+\linespread{$linespread$}
+$else$
+\linespread{1.4}
+$endif$
+\clubpenalty=300
+\widowpenalty=300
+\usepackage{gensymb,amsmath}
+
+% DOCUMENT LAYOUT
+%\usepackage{pdfsync} SOMEHOW THIS MESSES UP LONGTABLES
+\usepackage{geometry} 
+\geometry{
+  body={6.5in, 9in},
+  left=1in,
+  top=1in
+}
+
+% CUSTOMIZE PAGE HEADERS AND FOOTERS
+\usepackage{fancyhdr}
+\usepackage{nopageno}
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{}
+\cfoot{\fancyplain{}{}}
+\rhead{\thepage}
+
+% FONTS
+\usepackage{ifxetex,ifluatex}
+\usepackage[protrusion=true,final]{microtype}
+\ifxetex
+  \usepackage{fontspec}
+  \defaultfontfeatures{Mapping=tex-text} % converts LaTeX specials (``quotes'' --- dashes etc.) to unicode
+  \setromanfont [Ligatures={Common}]{Minion Pro}
+  \setmonofont[Scale=0.8]{Bitstream Vera Sans Mono} 
+  \setsansfont[Scale=0.9]{Optima Regular}
+  \usepackage{sectsty}
+  \usepackage[normalem]{ulem} 
+  \sectionfont{\rmfamily\bfseries\large} 
+  \subsectionfont{\rmfamily\bfseries\normalsize} 
+  \subsubsectionfont{\rmfamily\bfseries\upshape\normalsize}
+\else
+  \ifluatex
+    \usepackage{fontspec}
+    \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \else
+    \usepackage[utf8]{inputenc}
+  \fi
+\fi
+
+% COMPACT LISTS
+\usepackage{mdwlist}
+% IN-PARA LIST
+\usepackage{paralist}
+% NICE TABLES, BRO
+\usepackage{booktabs}
+\usepackage{longtable}
+\renewcommand{\arraystretch}{1.5} % for tables
+\usepackage{float} % provides the H option for float placement
+% FIGURES
+\usepackage{graphicx}
+\usepackage[margin=25pt, format=hang, labelfont=bf, size=normalsize]{caption}
+
+$if(natbib)$
+\usepackage{natbib}
+\bibliographystyle{unsrtnat-tpak}
+$endif$
+$if(biblatex)$
+\usepackage{biblatex}
+$if(biblio-files)$
+\bibliography{$biblio-files$}
+$endif$
+$endif$
+$if(lhs)$
+\usepackage{listings}
+\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+$endif$
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+$endif$
+$if(fancy-enums)$
+% Redefine labelwidth for lists; otherwise, the enumerate package will cause
+% markers to extend beyond the left margin.
+\makeatletter\AtBeginDocument{%
+  \renewcommand{\@listi}
+    {\setlength{\labelwidth}{4em}}
+}\makeatother
+\usepackage{enumerate}
+$endif$
+$if(tables)$
+\usepackage{ctable}
+$endif$
+$if(url)$
+\usepackage{url}
+$endif$
+$if(graphics)$
+% We will generate all images so they have a width \maxwidth. This means
+% that they will get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+\else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=\maxwidth]{#1}}
+$endif$
+\ifxetex
+  \usepackage[bookmarks, breaklinks, pdfauthor={Theodore Pak}]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\usepackage{color}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\definecolor{darkred}{rgb}{0.3,0,0}
+\hypersetup{colorlinks, linkcolor=black, citecolor=darkred, filecolor=black, urlcolor=darkblue}
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+% avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+$if(subscript)$
+\newcommand{\textsubscr}[1]{\ensuremath{_{\scriptsize\textrm{#1}}}}
+$endif$
+$if(listings)$
+\usepackage{listings}
+$endif$
+$if(numbersections)$
+$else$
+\setcounter{secnumdepth}{0}
+$endif$
+$if(verbatim-in-note)$
+\VerbatimFootnotes % allows verbatim text in footnotes
+$endif$
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+$if(title)$
+\title{$title$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$, $endfor$}
+$endif$
+$if(date)$
+\date{$date$}
+$else$
+\date{}
+$endif$
+
+\begin{document}
+$if(title)$
+\maketitle
+\thispagestyle{fancy}
+$endif$
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+$if(toc)$
+\tableofcontents
+
+$endif$
+$body$
+
+$if(natbib)$
+
+$if(biblio-smallfont)$
+\def\bibfont{\footnotesize}
+$endif$
+
+$if(biblio-files)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\bibliography{$biblio-files$}
+$endif$
+
+$endif$
+
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+$endif$
+
+$for(include-after)$
+$include-after$
+$endfor$
+\end{document}
