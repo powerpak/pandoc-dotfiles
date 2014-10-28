@@ -67,7 +67,7 @@ $endif$
 % NICE TABLES, BRO
 \usepackage{booktabs}
 \usepackage{longtable}
-\renewcommand{\arraystretch}{1.5} % for tables
+\renewcommand{\arraystretch}{$linespread$} % for tables
 \usepackage{float} % provides the H option for float placement
 % FIGURES
 \usepackage{graphicx}
